@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-<script>try{var t=localStorage.getItem('nexvion-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}</script>
+<script>try{var t=localStorage.getItem('nexvion-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);if(document.body){document.body.setAttribute('data-theme',t)}}}catch(e){}</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root{
@@ -24,7 +24,7 @@
     --font-display:"Outfit","Segoe UI",system-ui,sans-serif;
     --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
     --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
-    --show-light:block; --show-dark:none;
+    --show-light:block; --show-dark:none; --scheme:light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -33,7 +33,7 @@
       --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
       --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
       --shadow:0 18px 40px -22px rgba(0,0,0,.7);
-      --show-light:none; --show-dark:block;
+      --show-light:none; --show-dark:block; --scheme:dark;
     }
   }
   :root[data-theme="dark"]{
@@ -42,12 +42,38 @@
     --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
     --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
     --shadow:0 18px 40px -22px rgba(0,0,0,.7);
+    --show-light:none; --show-dark:block; --scheme:dark;
+  }
+
+  /* In-page toggle: the attribute is set on the body element, so it wins over the OS setting and any host theme */
+  body[data-theme="light"]{
+    --navy:#00394D; --navy-deep:#052B3B; --navy-tint:#0D4A62;
+    --green:#6EB803; --green-deep:#4E8600; --green-soft:#EAF5D9; --accent-text:#4E8600;
+    --bg:#F3F6F8; --surface:#FFFFFF; --surface-2:#E8EEF1; --line:#D3DDE3; --line-strong:#B4C4CD;
+    --ink:#0C2531; --heading:#00394D; --muted:#566C77;
+    --on-dark:#FFFFFF; --on-dark-muted:#B9CCD5; --on-dark-accent:#9FE03A;
+    --band-tile:rgba(255,255,255,.07); --band-line:rgba(255,255,255,.16);
+    --shadow:0 18px 40px -22px rgba(0,57,77,.45);
+    --radius:14px; --px:22%;
+    --font-display:"Outfit","Segoe UI",system-ui,sans-serif;
+    --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+    --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+    --show-light:block; --show-dark:none;
+    --scheme:light;
+  }
+  body[data-theme="dark"]{
+    --navy:#0A3A4E; --navy-deep:#061E2A; --navy-tint:#12506A;
+    --green-soft:#1D3712; --accent-text:#9FE03A;
+    --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
+    --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
+    --shadow:0 18px 40px -22px rgba(0,0,0,.7);
     --show-light:none; --show-dark:block;
+    --scheme:dark;
   }
 
   *,*::before,*::after{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:84px}
-  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:var(--bg);color:var(--ink);color-scheme:var(--scheme);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
   img{max-width:100%;display:block}
   a{color:inherit}
   h1,h2,h3{font-family:var(--font-display);color:var(--heading);line-height:1.15;margin:0;text-wrap:balance}
@@ -583,21 +609,35 @@
   var sunIcon = themeBtn.querySelector('.ico-sun');
   var moonIcon = themeBtn.querySelector('.ico-moon');
   var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function chosenTheme() {
+    var t = document.body.getAttribute('data-theme');
+    if (t === 'dark' || t === 'light') return t;
+    try { var saved = localStorage.getItem('nexvion-theme'); if (saved === 'dark' || saved === 'light') return saved; } catch (e) {}
+    return null;
+  }
   function effectiveTheme() {
+    var chosen = chosenTheme();
+    if (chosen) return chosen;
     var t = root.getAttribute('data-theme');
     return (t === 'dark' || t === 'light') ? t : (systemDark.matches ? 'dark' : 'light');
   }
+  function applyTheme(t) {
+    document.body.setAttribute('data-theme', t);
+    root.setAttribute('data-theme', t);
+  }
+  var initial = chosenTheme();
+  if (initial) applyTheme(initial);
   function paintTheme() {
     var dark = effectiveTheme() === 'dark';
-    sunIcon.hidden = !dark;
-    moonIcon.hidden = dark;
+    if (dark) { sunIcon.removeAttribute('hidden'); moonIcon.setAttribute('hidden', ''); }
+    else { moonIcon.removeAttribute('hidden'); sunIcon.setAttribute('hidden', ''); }
     var label = dark ? 'Switch to light theme' : 'Switch to dark theme';
     themeBtn.setAttribute('aria-label', label);
     themeBtn.title = label;
   }
   themeBtn.addEventListener('click', function () {
     var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
+    applyTheme(next);
     try { localStorage.setItem('nexvion-theme', next); } catch (e) {}
     paintTheme();
   });
