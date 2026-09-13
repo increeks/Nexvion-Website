@@ -6,6 +6,10 @@
 <meta name="description" content="Nexvion Networks Private Limited: private cloud VPS hosting, physical servers on cloud, managed services, cloud hosting, email and backup from Tier 3 certified data centers in India.">
 <meta name="theme-color" content="#00394D">
 <title>Nexvion Networks</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<script>try{var t=localStorage.getItem('nexvion-theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t)}}catch(e){}</script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
   :root{
@@ -20,6 +24,7 @@
     --font-display:"Outfit","Segoe UI",system-ui,sans-serif;
     --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
     --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+    --show-light:block; --show-dark:none;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -28,6 +33,7 @@
       --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
       --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
       --shadow:0 18px 40px -22px rgba(0,0,0,.7);
+      --show-light:none; --show-dark:block;
     }
   }
   :root[data-theme="dark"]{
@@ -36,6 +42,7 @@
     --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
     --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
     --shadow:0 18px 40px -22px rgba(0,0,0,.7);
+    --show-light:none; --show-dark:block;
   }
 
   *,*::before,*::after{box-sizing:border-box}
@@ -73,17 +80,24 @@
   .header-inner{display:flex;align-items:center;gap:24px;min-height:72px}
   .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
   .brand img{height:42px;width:auto}
-  .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green-deep);line-height:1}
+  .logo-light{display:var(--show-light)} .logo-dark{display:var(--show-dark)}
+  [hidden]{display:none!important}
+  .header-actions{display:flex;align-items:center;gap:8px;flex:none}
+  .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line-strong);background:transparent;color:var(--heading);cursor:pointer;padding:0}
+  .theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .theme-toggle:hover,.nav-toggle:hover{background:var(--surface-2)}
+  .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-text);line-height:1}
   .brand-name small{display:block;font-family:var(--font-body);font-weight:500;font-size:.62rem;letter-spacing:.2em;color:var(--muted);margin-top:4px}
   .nav{display:flex;align-items:center;gap:6px;margin-left:auto}
-  .nav a{text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink);padding:8px 12px;border-radius:8px}
+  .nav a{text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink);padding:8px 12px;border-radius:8px;white-space:nowrap}
   .nav a:hover{background:var(--surface-2)}
   .nav .btn{margin-left:8px}
-  .nav-toggle{display:none;margin-left:auto;background:transparent;border:1.5px solid var(--line-strong);border-radius:10px;width:44px;height:40px;cursor:pointer;color:var(--heading);align-items:center;justify-content:center}
+  .nav-toggle{display:none;background:transparent;padding:0;border:1.5px solid var(--line-strong);border-radius:10px;width:44px;height:40px;cursor:pointer;color:var(--heading);align-items:center;justify-content:center}
   .nav-toggle svg{width:22px;height:22px}
+  @media (max-width:1000px){.brand-name{display:none}}
   @media (max-width:860px){
-    .brand-name{display:none}
     .nav-toggle{display:inline-flex}
+    .header-actions{margin-left:auto}
     .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--surface);border-bottom:1px solid var(--line);padding:12px clamp(16px,4vw,32px) 18px;gap:4px;box-shadow:var(--shadow)}
     .nav.open{display:flex}
     .nav a{padding:12px}
@@ -96,7 +110,7 @@
   .hero .wrap{position:relative}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center}
   .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:700;letter-spacing:-.01em}
-  .hero h1 em{font-style:normal;color:var(--green-deep)}
+  .hero h1 em{font-style:normal;color:var(--accent-text)}
   .hero .lead{margin-top:20px;font-size:1.15rem}
   .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
   .facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin:32px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
@@ -230,15 +244,13 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="#top" aria-label="Nexvion Networks home">
-      <img src="assets/nexvion-mark.png" alt="" width="768" height="440">
+      <img class="logo-light" src="assets/nexvion-mark.png" alt="" width="768" height="440">
+      <img class="logo-dark" src="assets/nexvion-mark-white.png" alt="" width="768" height="437">
       <span class="brand-name">Nexvion Networks<small>Built for speed. Ready for scale.</small></span>
     </a>
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
     <nav class="nav" id="siteNav" aria-label="Primary">
       <a href="#services">Services</a>
-      <a href="#why">Why private cloud</a>
+      <a href="#why">Why VPS</a>
       <a href="#plans">Plans</a>
       <a href="#datacenters">Data centers</a>
       <a href="#contact">Contact</a>
@@ -247,6 +259,15 @@
         WhatsApp us
       </a>
     </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
+        <svg class="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+        <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -555,6 +576,34 @@
 <script>
 (function () {
   var WA_NUMBER = '919988997485';
+
+  // Light / dark theme toggle (overrides the system setting, remembered per browser)
+  var root = document.documentElement;
+  var themeBtn = document.getElementById('themeToggle');
+  var sunIcon = themeBtn.querySelector('.ico-sun');
+  var moonIcon = themeBtn.querySelector('.ico-moon');
+  var systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  function effectiveTheme() {
+    var t = root.getAttribute('data-theme');
+    return (t === 'dark' || t === 'light') ? t : (systemDark.matches ? 'dark' : 'light');
+  }
+  function paintTheme() {
+    var dark = effectiveTheme() === 'dark';
+    sunIcon.hidden = !dark;
+    moonIcon.hidden = dark;
+    var label = dark ? 'Switch to light theme' : 'Switch to dark theme';
+    themeBtn.setAttribute('aria-label', label);
+    themeBtn.title = label;
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('nexvion-theme', next); } catch (e) {}
+    paintTheme();
+  });
+  if (systemDark.addEventListener) systemDark.addEventListener('change', paintTheme); else systemDark.addListener(paintTheme);
+  new MutationObserver(paintTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  paintTheme();
 
   // Mobile navigation
   var toggle = document.getElementById('navToggle');
