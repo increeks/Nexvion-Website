@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Nexvion Networks Private Limited: private cloud VPS hosting, physical servers on cloud, managed services, cloud hosting, email and backup from Tier 3 certified data centers in India.">
+<meta name="theme-color" content="#00394D">
+<title>Nexvion Networks</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+  :root{
+    --navy:#00394D; --navy-deep:#052B3B; --navy-tint:#0D4A62;
+    --green:#6EB803; --green-deep:#4E8600; --green-soft:#EAF5D9; --accent-text:#4E8600;
+    --bg:#F3F6F8; --surface:#FFFFFF; --surface-2:#E8EEF1; --line:#D3DDE3; --line-strong:#B4C4CD;
+    --ink:#0C2531; --heading:#00394D; --muted:#566C77;
+    --on-dark:#FFFFFF; --on-dark-muted:#B9CCD5; --on-dark-accent:#9FE03A;
+    --band-tile:rgba(255,255,255,.07); --band-line:rgba(255,255,255,.16);
+    --shadow:0 18px 40px -22px rgba(0,57,77,.45);
+    --radius:14px; --px:22%;
+    --font-display:"Outfit","Segoe UI",system-ui,sans-serif;
+    --font-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+    --font-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --navy:#0A3A4E; --navy-deep:#061E2A; --navy-tint:#12506A;
+      --green-soft:#1D3712; --accent-text:#9FE03A;
+      --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
+      --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
+      --shadow:0 18px 40px -22px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --navy:#0A3A4E; --navy-deep:#061E2A; --navy-tint:#12506A;
+    --green-soft:#1D3712; --accent-text:#9FE03A;
+    --bg:#081C26; --surface:#0F2C3A; --surface-2:#0C2431; --line:#234A5B; --line-strong:#33627A;
+    --ink:#E6EEF2; --heading:#EEF5F8; --muted:#9DB3BD;
+    --shadow:0 18px 40px -22px rgba(0,0,0,.7);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--font-display);color:var(--heading);line-height:1.15;margin:0;text-wrap:balance}
+  p{margin:0}
+  :focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1140px;margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+  .hero-grid > *,.about-grid > *,.why-grid > *,.dc-grid > *,.contact-grid > *,.footer-grid > *,.services > *,.plans > *,.row > *{min-width:0}
+  .px-mark{display:inline-block;width:10px;height:10px;border-radius:var(--px);background:var(--green);flex:none}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin-bottom:14px}
+  .section{padding-block:clamp(56px,8vw,96px)}
+  .section-head{max-width:640px;margin-bottom:clamp(28px,4vw,44px)}
+  .section-head h2{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:600}
+  .lead{color:var(--muted);font-size:1.1rem;max-width:62ch;margin-top:14px}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1rem;padding:13px 22px;border-radius:12px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;line-height:1;white-space:nowrap;transition:transform .15s ease,background-color .15s ease,box-shadow .15s ease}
+  .btn svg{width:18px;height:18px;flex:none}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-green{background:var(--green);color:#06260A}
+  .btn-green:hover{background:#7BCB0E}
+  .btn-navy{background:var(--navy);color:var(--on-dark);border-color:var(--navy-tint)}
+  .btn-outline{background:transparent;color:var(--heading);border-color:var(--line-strong)}
+  .btn-outline:hover{background:var(--surface)}
+  .btn-sm{padding:10px 16px;font-size:.92rem}
+  .btn.is-disabled{opacity:.55;cursor:not-allowed}
+  .btn.is-disabled:hover{transform:none}
+
+  /* Header */
+  .site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .header-inner{display:flex;align-items:center;gap:24px;min-height:72px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+  .brand img{height:42px;width:auto}
+  .brand-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--green-deep);line-height:1}
+  .brand-name small{display:block;font-family:var(--font-body);font-weight:500;font-size:.62rem;letter-spacing:.2em;color:var(--muted);margin-top:4px}
+  .nav{display:flex;align-items:center;gap:6px;margin-left:auto}
+  .nav a{text-decoration:none;font-family:var(--font-display);font-weight:500;font-size:.95rem;color:var(--ink);padding:8px 12px;border-radius:8px}
+  .nav a:hover{background:var(--surface-2)}
+  .nav .btn{margin-left:8px}
+  .nav-toggle{display:none;margin-left:auto;background:transparent;border:1.5px solid var(--line-strong);border-radius:10px;width:44px;height:40px;cursor:pointer;color:var(--heading);align-items:center;justify-content:center}
+  .nav-toggle svg{width:22px;height:22px}
+  @media (max-width:860px){
+    .brand-name{display:none}
+    .nav-toggle{display:inline-flex}
+    .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--surface);border-bottom:1px solid var(--line);padding:12px clamp(16px,4vw,32px) 18px;gap:4px;box-shadow:var(--shadow)}
+    .nav.open{display:flex}
+    .nav a{padding:12px}
+    .nav .btn{margin:8px 0 0;justify-content:center}
+  }
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;padding-block:clamp(48px,7vw,88px) clamp(56px,7vw,88px);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:36px 36px;background-position:center top}
+  .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 35%,var(--bg) 78%);pointer-events:none}
+  .hero .wrap{position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center}
+  .hero h1{font-size:clamp(2.2rem,4.6vw,3.6rem);font-weight:700;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--green-deep)}
+  .hero .lead{margin-top:20px;font-size:1.15rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .facts{display:flex;flex-wrap:wrap;gap:10px 26px;margin:32px 0 0;padding:0;list-style:none;color:var(--muted);font-size:.95rem}
+  .facts li{display:inline-flex;align-items:center;gap:9px}
+  .facts .px-mark{width:9px;height:9px}
+  .hero-visual{position:relative;padding:18px 26px 26px 18px}
+  .hero-photo{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow);position:relative;z-index:1}
+  .pxl{position:absolute;border-radius:var(--px);z-index:2}
+  .pxl.n{background:var(--navy)} .pxl.g{background:var(--green)}
+  .dissolve{position:absolute;top:-8px;right:-6px;width:150px;height:150px;z-index:0}
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-visual{padding:10px 18px 18px 10px}
+    .dissolve{width:110px;height:110px}
+  }
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+  .about-grid .section-head{margin-bottom:0}
+  .about-copy{display:grid;gap:18px;color:var(--muted);font-size:1.05rem;max-width:60ch;padding-top:6px}
+  .about-copy strong{color:var(--ink);font-weight:600}
+  .tagline{display:inline-flex;align-items:center;gap:12px;margin-top:22px;font-family:var(--font-display);font-weight:600;color:var(--heading);letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+
+  /* Services */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .service{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:grid;gap:14px;align-content:start}
+  .icon{width:46px;height:46px;border-radius:var(--px);background:var(--navy);color:#fff;display:grid;place-items:center}
+  .icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .service h3{font-size:1.15rem;font-weight:600}
+  .service p{color:var(--muted);font-size:.97rem}
+  @media (max-width:900px){.services{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.services{grid-template-columns:1fr}}
+
+  /* Why */
+  .why{background:var(--surface);border-block:1px solid var(--line)}
+  .why-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:start}
+  .reasons{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px}
+  .reasons li{display:grid;grid-template-columns:12px 1fr;gap:14px;align-items:start;font-size:1.05rem;color:var(--ink);font-weight:500}
+  .reasons .px-mark{margin-top:9px;width:12px;height:12px}
+  .benefits{margin:0;border-top:1px solid var(--line)}
+  .benefit{display:grid;grid-template-columns:170px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .benefit dt{font-family:var(--font-display);font-weight:600;font-size:1.08rem;color:var(--heading)}
+  .benefit dd{margin:0;color:var(--muted)}
+  .benefits-title{font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-text);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  @media (max-width:860px){.why-grid{grid-template-columns:1fr}}
+  @media (max-width:520px){.benefit{grid-template-columns:1fr;gap:6px}}
+
+  /* Plans */
+  .plans-section{background:var(--surface-2)}
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:stretch}
+  .plan{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;display:flex;flex-direction:column;gap:18px}
+  .plan.featured{border-color:var(--green);box-shadow:var(--shadow)}
+  .plan-name{font-family:var(--font-display);font-weight:600;font-size:1.2rem;color:var(--heading)}
+  .plan-for{color:var(--muted);font-size:.93rem;margin-top:4px}
+  .badge{position:absolute;top:-12px;right:18px;background:var(--green-soft);color:var(--accent-text);font-family:var(--font-display);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--green)}
+  .price{font-family:var(--font-display);font-weight:700;font-size:2.1rem;color:var(--heading);letter-spacing:-.01em;font-variant-numeric:tabular-nums;line-height:1}
+  .price small{font-family:var(--font-body);font-weight:500;font-size:.9rem;color:var(--muted);letter-spacing:0;margin-left:4px}
+  .specs{margin:0;display:grid;grid-template-columns:auto 1fr;gap:9px 14px;font-size:.95rem;border-top:1px solid var(--line);padding-top:16px}
+  .specs dt{color:var(--muted)}
+  .specs dd{margin:0;font-family:var(--font-mono);font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .plan .btn{margin-top:auto;justify-content:center}
+  .plan-note{margin-top:26px;color:var(--muted);font-size:.93rem;max-width:78ch}
+  @media (max-width:1000px){.plans{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.plans{grid-template-columns:1fr}}
+
+  /* Data centers band */
+  .dc{background:var(--navy);color:var(--on-dark)}
+  .dc .eyebrow{color:var(--on-dark-accent)}
+  .dc h2{color:var(--on-dark)}
+  .dc .lead{color:var(--on-dark-muted)}
+  .dc-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(32px,5vw,72px);align-items:center}
+  .dc .section-head{margin-bottom:0}
+  .locations{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0;padding:0;list-style:none}
+  .location{background:var(--band-tile);border:1px solid var(--band-line);border-radius:var(--radius);padding:22px 20px;display:grid;gap:10px}
+  .location .px-mark{width:14px;height:14px}
+  .location h3{color:var(--on-dark);font-size:1.25rem;font-weight:600}
+  .location p{color:var(--on-dark-muted);font-size:.9rem}
+  .isps{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px;color:var(--on-dark-muted);font-size:.95rem}
+  .chip{display:inline-block;padding:6px 12px;border-radius:999px;border:1px solid var(--band-line);background:var(--band-tile);color:var(--on-dark);font-family:var(--font-display);font-weight:500;font-size:.88rem}
+  @media (max-width:860px){.dc-grid{grid-template-columns:1fr}}
+  @media (max-width:560px){.locations{grid-template-columns:1fr}}
+
+  /* Contact */
+  .contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:start}
+  .form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,30px)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .field{display:grid;gap:6px}
+  .field label{font-family:var(--font-display);font-weight:600;font-size:.9rem;color:var(--heading)}
+  .field label span{color:var(--muted);font-weight:500}
+  .field input,.field select,.field textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1.5px solid var(--line-strong);border-radius:10px;padding:12px 14px}
+  .field textarea{resize:vertical;min-height:120px}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--green);outline-offset:1px;border-color:var(--green)}
+  .form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:4px}
+  .form-hint{color:var(--muted);font-size:.9rem;max-width:44ch}
+  .form-status{min-height:1.4em;font-size:.92rem;color:var(--accent-text)}
+  .contact-card{background:var(--navy);color:var(--on-dark);border-radius:var(--radius);padding:clamp(22px,3vw,30px);display:grid;gap:22px}
+  .contact-card h3{color:var(--on-dark);font-size:1.3rem;font-weight:600}
+  .contact-row{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+  .contact-row .icon{width:40px;height:40px;background:var(--band-tile);border:1px solid var(--band-line)}
+  .contact-row .icon svg{width:20px;height:20px}
+  .contact-row b{display:block;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-dark-accent);margin-bottom:4px}
+  .contact-row a{color:var(--on-dark);text-decoration:none}
+  .contact-row a:hover{text-decoration:underline}
+  .contact-row .mono{font-family:var(--font-mono);font-weight:500;font-variant-numeric:tabular-nums}
+  .contact-row p{color:var(--on-dark-muted);font-size:.92rem;margin-top:4px}
+  @media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+  @media (max-width:520px){.row{grid-template-columns:1fr}}
+
+  /* Footer */
+  .site-footer{background:var(--navy-deep);color:var(--on-dark-muted);padding-block:52px 28px}
+  .footer-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:36px;align-items:start}
+  .footer-grid img{height:76px;width:auto}
+  .footer-grid p{margin-top:16px;max-width:42ch;font-size:.95rem}
+  .footer-col h4{font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--on-dark-accent);margin:0 0 14px}
+  .footer-col ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .footer-col a{color:var(--on-dark);text-decoration:none;font-size:.95rem}
+  .footer-col a:hover{text-decoration:underline}
+  .footer-bottom{margin-top:44px;padding-top:20px;border-top:1px solid var(--band-line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.88rem}
+  @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}.footer-grid > :first-child{grid-column:1 / -1}}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .btn{transition:none}
+    .btn:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Nexvion Networks home">
+      <img src="assets/nexvion-mark.png" alt="" width="768" height="440">
+      <span class="brand-name">Nexvion Networks<small>Built for speed. Ready for scale.</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="siteNav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#why">Why private cloud</a>
+      <a href="#plans">Plans</a>
+      <a href="#datacenters">Data centers</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-green btn-sm" href="https://wa.me/919988997485?text=Hello%20Nexvion%20Networks%2C%20I%27d%20like%20to%20know%20more%20about%20your%20private%20cloud%20VPS%20hosting." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp us
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i class="px-mark"></i>Private cloud VPS hosting · Noida, India</span>
+        <h1>Power your business with <em>private cloud</em> VPS hosting.</h1>
+        <p class="lead">Nexvion Networks delivers secure hosting environments built to support demanding business applications around the clock, improve website stability, and give you infrastructure that grows with your technology requirements.</p>
+        <div class="hero-actions">
+          <a class="btn btn-green" href="#contact">Get a quote on WhatsApp</a>
+          <a class="btn btn-outline" href="#plans">See VPS plans</a>
+        </div>
+        <ul class="facts">
+          <li><i class="px-mark"></i>Tier 3 certified data centers</li>
+          <li><i class="px-mark"></i>Greater Noida · Bangalore · Mumbai</li>
+          <li><i class="px-mark"></i>24×7 support</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="dissolve" viewBox="0 0 150 150" fill="none">
+          <rect x="112" y="6" width="26" height="26" rx="6" fill="var(--navy)"/>
+          <rect x="72" y="18" width="30" height="30" rx="7" fill="var(--navy)"/>
+          <rect x="40" y="30" width="20" height="20" rx="5" fill="var(--green)"/>
+          <rect x="118" y="46" width="18" height="18" rx="5" fill="var(--green)"/>
+          <rect x="80" y="62" width="30" height="30" rx="7" fill="var(--navy)"/>
+          <rect x="46" y="66" width="24" height="24" rx="6" fill="var(--navy)"/>
+          <rect x="120" y="82" width="22" height="22" rx="6" fill="var(--navy)"/>
+          <rect x="88" y="106" width="20" height="20" rx="5" fill="var(--green)"/>
+        </svg>
+        <img class="hero-photo" src="assets/datacenter.jpg" alt="" width="1500" height="1001">
+        <i class="pxl n" style="left:0;top:40px;width:36px;height:36px"></i>
+        <i class="pxl g" style="left:4px;top:86px;width:22px;height:22px"></i>
+        <i class="pxl n" style="left:34px;bottom:2px;width:30px;height:30px"></i>
+        <i class="pxl g" style="left:74px;bottom:14px;width:18px;height:18px"></i>
+        <i class="pxl g" style="right:12px;bottom:0;width:26px;height:26px"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap about-grid">
+      <div class="section-head">
+        <span class="eyebrow"><i class="px-mark"></i>About Nexvion Networks</span>
+        <h2>A smarter hosting approach for businesses that cannot afford downtime.</h2>
+        <span class="tagline"><i class="px-mark"></i>Built for speed. Ready for scale.</span>
+      </div>
+      <div class="about-copy">
+        <p><strong>Nexvion Networks Private Limited</strong> delivers secure hosting environments designed to support demanding business applications 24×7, improve website stability, and provide flexible infrastructure that grows with your changing technology requirements.</p>
+        <p>We help businesses create a dependable hosting environment with private cloud VPS solutions. Our approach focuses on stable performance, security, resource flexibility, and professional management.</p>
+        <p>Whether you are hosting business applications or mission-critical websites, we provide the infrastructure needed for smoother day-to-day operations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><i class="px-mark"></i>Services</span>
+        <h2>Everything your infrastructure needs, under one roof.</h2>
+        <p class="lead">Six services that cover hosting, hardware, management, email and recovery, so you deal with one team instead of five vendors.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <h3>VPS Hosting</h3>
+          <p>Private cloud virtual servers with dedicated resources, full control of your environment and Tier 3 certified hosting.</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div>
+          <h3>Physical Servers on Cloud</h3>
+          <p>Single-tenant physical servers hosted in our data centers for workloads that need the isolation and performance of real hardware.</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div>
+          <h3>Managed Services</h3>
+          <p>Monitoring, patching and day-to-day administration handled by our engineers, so your team can focus on the business.</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.2 4.5 4.5 0 0 0 7 18z"/></svg></div>
+          <h3>Cloud Hosting</h3>
+          <p>Flexible cloud environments for business applications and websites whose demand changes month to month.</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <h3>Email Solutions</h3>
+          <p>Business email on your own domain, with the storage and reliability your people expect from a professional mailbox.</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg></div>
+          <h3>Backup Solutions</h3>
+          <p>Scheduled backups with sensible retention, so a bad day for a server stays a small one for your business.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why" id="why">
+    <div class="wrap why-grid">
+      <div>
+        <div class="section-head">
+          <span class="eyebrow"><i class="px-mark"></i>Why private cloud VPS</span>
+          <h2>Why choose private cloud VPS hosting?</h2>
+          <p class="lead">It provides a practical balance between performance, privacy and cost.</p>
+        </div>
+        <ul class="reasons">
+          <li><i class="px-mark"></i>Dedicated resources help maintain consistent performance.</li>
+          <li><i class="px-mark"></i>Greater control over your server environment and configurations.</li>
+          <li><i class="px-mark"></i>Flexible resources adapt to changing business needs.</li>
+          <li><i class="px-mark"></i>A practical balance between performance, privacy and cost.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="benefits-title"><i class="px-mark"></i>Key business benefits</div>
+        <dl class="benefits">
+          <div class="benefit"><dt>Better performance</dt><dd>Resources are allocated for your business needs, not shared with a noisy neighbour.</dd></div>
+          <div class="benefit"><dt>Enhanced security</dt><dd>Greater isolation helps protect important data.</dd></div>
+          <div class="benefit"><dt>Scalability</dt><dd>Upgrade resources as workloads increase.</dd></div>
+          <div class="benefit"><dt>Reliability</dt><dd>Reduce disruptions with a professionally managed environment.</dd></div>
+          <div class="benefit"><dt>Cost efficiency</dt><dd>Avoid major hardware and maintenance investments.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="section plans-section" id="plans">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><i class="px-mark"></i>VPS plans</span>
+        <h2>Pick a size today. Resize when you grow.</h2>
+        <p class="lead">Every plan runs on Tier 3 certified Indian data centers with full root access and 24×7 support. Managed service can be added to any plan.</p>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <div><div class="plan-name">Starter</div><p class="plan-for">Small sites, staging and internal tools</p></div>
+          <div class="price">₹799<small>/ month</small></div>
+          <dl class="specs">
+            <dt>vCPU</dt><dd>1</dd>
+            <dt>RAM</dt><dd>2 GB</dd>
+            <dt>SSD storage</dt><dd>40 GB</dd>
+            <dt>Transfer</dt><dd>1 TB</dd>
+            <dt>IPv4</dt><dd>1</dd>
+          </dl>
+          <a class="btn btn-outline" href="#contact" data-plan="Starter plan (1 vCPU / 2 GB)">Enquire</a>
+        </article>
+        <article class="plan featured">
+          <span class="badge">Most popular</span>
+          <div><div class="plan-name">Business</div><p class="plan-for">Company websites and business applications</p></div>
+          <div class="price">₹1,499<small>/ month</small></div>
+          <dl class="specs">
+            <dt>vCPU</dt><dd>2</dd>
+            <dt>RAM</dt><dd>4 GB</dd>
+            <dt>SSD storage</dt><dd>80 GB</dd>
+            <dt>Transfer</dt><dd>2 TB</dd>
+            <dt>IPv4</dt><dd>1</dd>
+          </dl>
+          <a class="btn btn-green" href="#contact" data-plan="Business plan (2 vCPU / 4 GB)">Enquire</a>
+        </article>
+        <article class="plan">
+          <div><div class="plan-name">Growth</div><p class="plan-for">E-commerce, ERP and databases</p></div>
+          <div class="price">₹2,899<small>/ month</small></div>
+          <dl class="specs">
+            <dt>vCPU</dt><dd>4</dd>
+            <dt>RAM</dt><dd>8 GB</dd>
+            <dt>SSD storage</dt><dd>160 GB</dd>
+            <dt>Transfer</dt><dd>4 TB</dd>
+            <dt>IPv4</dt><dd>1</dd>
+          </dl>
+          <a class="btn btn-outline" href="#contact" data-plan="Growth plan (4 vCPU / 8 GB)">Enquire</a>
+        </article>
+        <article class="plan">
+          <div><div class="plan-name">Enterprise</div><p class="plan-for">Mission-critical and high-traffic workloads</p></div>
+          <div class="price">₹5,499<small>/ month</small></div>
+          <dl class="specs">
+            <dt>vCPU</dt><dd>8</dd>
+            <dt>RAM</dt><dd>16 GB</dd>
+            <dt>SSD storage</dt><dd>320 GB</dd>
+            <dt>Transfer</dt><dd>8 TB</dd>
+            <dt>IPv4</dt><dd>2</dd>
+          </dl>
+          <a class="btn btn-outline" href="#contact" data-plan="Enterprise plan (8 vCPU / 16 GB)">Enquire</a>
+        </article>
+      </div>
+      <p class="plan-note">Indicative monthly pricing in INR, GST extra. Final quotes are confirmed on WhatsApp. Larger configurations, physical servers, Windows licensing and managed service are quoted on request.</p>
+    </div>
+  </section>
+
+  <section class="section dc" id="datacenters">
+    <div class="wrap dc-grid">
+      <div class="section-head">
+        <span class="eyebrow"><i class="px-mark"></i>Data center locations</span>
+        <h2>Tier 3 certified facilities across India.</h2>
+        <p class="lead">Our infrastructure is hosted at Yotta Data Center facilities. Every location is Tier 3 certified, and each data center features comprehensive connectivity, hosting all major ISPs.</p>
+        <div class="isps"><span>Carriers on site:</span><span class="chip">Airtel</span><span class="chip">Tata</span><span class="chip">Jio</span></div>
+      </div>
+      <ul class="locations">
+        <li class="location"><i class="px-mark"></i><h3>Greater Noida</h3><p>Tier 3 certified · Delhi NCR</p></li>
+        <li class="location"><i class="px-mark"></i><h3>Bangalore</h3><p>Tier 3 certified · South India</p></li>
+        <li class="location"><i class="px-mark"></i><h3>Mumbai</h3><p>Tier 3 certified · West India</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow"><i class="px-mark"></i>Contact</span>
+        <h2>Tell us what you need to host.</h2>
+        <p class="lead">Fill in the form and it opens WhatsApp with your details ready to send to our support number. Nothing is sent until you press send in WhatsApp.</p>
+      </div>
+      <div class="contact-grid">
+        <form class="form" id="enquiryForm" novalidate>
+          <div class="row">
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="f-company">Company <span>(optional)</span></label><input id="f-company" name="company" type="text" autocomplete="organization"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91" required></div>
+            <div class="field"><label for="f-email">Email <span>(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+          </div>
+          <div class="field">
+            <label for="f-interest">Interested in</label>
+            <select id="f-interest" name="interest">
+              <option>VPS Hosting</option>
+              <option>Starter plan (1 vCPU / 2 GB)</option>
+              <option>Business plan (2 vCPU / 4 GB)</option>
+              <option>Growth plan (4 vCPU / 8 GB)</option>
+              <option>Enterprise plan (8 vCPU / 16 GB)</option>
+              <option>Physical Servers on Cloud</option>
+              <option>Managed Services</option>
+              <option>Cloud Hosting</option>
+              <option>Email Solutions</option>
+              <option>Backup Solutions</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-message">Message</label><textarea id="f-message" name="message" rows="5" placeholder="What are you hosting, roughly how much traffic, and when do you need it live?" required></textarea></div>
+          <div class="form-actions">
+            <a class="btn btn-green is-disabled" id="waSend" href="#contact" aria-disabled="true" role="button">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              Send on WhatsApp
+            </a>
+            <span class="form-hint">Opens WhatsApp to +91 99889 97485 with your message pre-filled.</span>
+          </div>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
+        </form>
+
+        <aside class="contact-card">
+          <h3>Reach us directly</h3>
+          <div class="contact-row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></div>
+            <div><b>Call</b><a class="mono" href="tel:+919988997485">+91 99889 97485</a><br><a class="mono" href="tel:+919988997480">+91 99889 97480</a><p>Support is available 24×7.</p></div>
+          </div>
+          <div class="contact-row">
+            <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+            <div><b>WhatsApp</b><a class="mono" href="https://wa.me/919988997485" target="_blank" rel="noopener">+91 99889 97485</a><p>Fastest way to get a quote.</p></div>
+          </div>
+          <div class="contact-row">
+            <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+            <div><b>Email</b><a href="mailto:info@nexvionnet.com">info@nexvionnet.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-10a6 6 0 1 1 12 0c0 4.5-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></div>
+            <div><b>Office</b><span>B-41, Sector 63, Noida,<br>Uttar Pradesh, India</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/nexvion-logo-white.png" alt="Nexvion Networks. Built for speed. Ready for scale." width="782" height="558">
+        <p>Private cloud VPS hosting, physical servers, managed services, cloud hosting, email and backup for Indian businesses, from Tier 3 certified data centers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#plans">VPS plans</a></li>
+          <li><a href="#datacenters">Data centers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+919988997485">+91 99889 97485</a></li>
+          <li><a href="tel:+919988997480">+91 99889 97480</a></li>
+          <li><a href="mailto:info@nexvionnet.com">info@nexvionnet.com</a></li>
+          <li><a href="https://wa.me/919988997485" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Nexvion Networks Private Limited</span>
+      <span>B-41, Sector 63, Noida, Uttar Pradesh</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var WA_NUMBER = '919988997485';
+
+  // Mobile navigation
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // Plan buttons preselect the interest field
+  var interest = document.getElementById('f-interest');
+  document.querySelectorAll('[data-plan]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      interest.value = btn.getAttribute('data-plan');
+      setTimeout(function () { document.getElementById('f-name').focus({ preventScroll: true }); }, 400);
+      update();
+    });
+  });
+
+  // Enquiry form -> WhatsApp deep link
+  var form = document.getElementById('enquiryForm');
+  var send = document.getElementById('waSend');
+  var status = document.getElementById('formStatus');
+  var fields = {
+    name: document.getElementById('f-name'),
+    company: document.getElementById('f-company'),
+    phone: document.getElementById('f-phone'),
+    email: document.getElementById('f-email'),
+    message: document.getElementById('f-message')
+  };
+
+  function missing() {
+    var out = [];
+    if (!fields.name.value.trim()) out.push('your name');
+    if (fields.phone.value.replace(/\D/g, '').length < 10) out.push('a phone number');
+    if (!fields.message.value.trim()) out.push('a short message');
+    return out;
+  }
+
+  function compose() {
+    var lines = ['Hello Nexvion Networks, I would like to enquire about hosting.', ''];
+    lines.push('Name: ' + fields.name.value.trim());
+    if (fields.company.value.trim()) lines.push('Company: ' + fields.company.value.trim());
+    lines.push('Phone: ' + fields.phone.value.trim());
+    if (fields.email.value.trim()) lines.push('Email: ' + fields.email.value.trim());
+    lines.push('Interested in: ' + interest.value);
+    lines.push('', 'Message: ' + fields.message.value.trim());
+    return lines.join('\n');
+  }
+
+  function update() {
+    var gaps = missing();
+    if (gaps.length) {
+      send.classList.add('is-disabled');
+      send.setAttribute('aria-disabled', 'true');
+      send.setAttribute('href', '#contact');
+      send.removeAttribute('target');
+      send.removeAttribute('rel');
+    } else {
+      send.classList.remove('is-disabled');
+      send.setAttribute('aria-disabled', 'false');
+      send.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(compose()));
+      send.setAttribute('target', '_blank');
+      send.setAttribute('rel', 'noopener');
+      status.textContent = '';
+    }
+  }
+
+  function describe(gaps) {
+    if (gaps.length === 1) return gaps[0];
+    return gaps.slice(0, -1).join(', ') + ' and ' + gaps[gaps.length - 1];
+  }
+
+  Object.keys(fields).forEach(function (k) { fields[k].addEventListener('input', update); });
+  interest.addEventListener('change', update);
+
+  send.addEventListener('click', function (e) {
+    var gaps = missing();
+    if (gaps.length) {
+      e.preventDefault();
+      status.textContent = 'Add ' + describe(gaps) + ' to continue.';
+      var first = !fields.name.value.trim() ? fields.name : (fields.phone.value.replace(/\D/g, '').length < 10 ? fields.phone : fields.message);
+      first.focus();
+      return;
+    }
+    status.textContent = 'WhatsApp is opening with your message. Press send there to reach us.';
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    send.click();
+  });
+
+  document.getElementById('year').textContent = String(new Date().getFullYear());
+  update();
+})();
+</script>
+</body>
+</html>
