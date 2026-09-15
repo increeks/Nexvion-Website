@@ -24,5 +24,6 @@ The enquiry form does not post anywhere. It composes a message from the fields a
 - `shobhit-sharma-visiting-card.html` – self-contained page (fonts, logos and QR embedded). Open it and print at 100% with no margins; each side is one 3.5 × 2 inch page.
 - `shobhit-sharma-visiting-card.pdf` – the same two pages, ready for a print shop.
 - `shobhit-sharma-card-front.png`, `shobhit-sharma-card-back.png` – 300 dpi renders of each side.
+- `sujeet-kumar-visiting-card.html`, `.pdf`, `sujeet-kumar-card-front.png`, `sujeet-kumar-card-back.png` – the same set for Sujeet Kumar, Founder & CTO.
 
-The QR code on the front is a vCard with the name, company, title, both mobile numbers, email, head office address and nexvionnet.com. Scanning it offers to save the contact.
+The QR code on each front is a vCard with that person's name, company, title, both mobile numbers, email, head office address and nexvionnet.com. Scanning it offers to save the contact.
