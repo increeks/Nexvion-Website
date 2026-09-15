@@ -16,3 +16,13 @@ Single-page marketing site for Nexvion Networks Private Limited (private cloud V
 The sun/moon button in the header switches between light and dark themes and remembers the choice in the visitor's browser; with no choice made, the site follows the device setting.
 
 The enquiry form does not post anywhere. It composes a message from the fields and opens WhatsApp to the support number with that message pre-filled; the visitor presses send in WhatsApp.
+
+## Visiting cards
+
+`cards/` holds print-ready visiting cards in the site's styling.
+
+- `shobhit-sharma-visiting-card.html` – self-contained page (fonts, logos and QR embedded). Open it and print at 100% with no margins; each side is one 3.5 × 2 inch page.
+- `shobhit-sharma-visiting-card.pdf` – the same two pages, ready for a print shop.
+- `shobhit-sharma-card-front.png`, `shobhit-sharma-card-back.png` – 300 dpi renders of each side.
+
+The QR code on the front is a vCard with the name, company, title, both mobile numbers, email, head office address and nexvionnet.com. Scanning it offers to save the contact.
