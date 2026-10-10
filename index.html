@@ -158,6 +158,10 @@
   .about-grid .section-head{margin-bottom:0}
   .about-copy{display:grid;gap:18px;color:var(--muted);font-size:1.05rem;max-width:60ch;padding-top:6px}
   .about-copy strong{color:var(--ink);font-weight:600}
+  .about-values{display:grid;gap:26px;margin-top:32px}
+  .about-values article{border-top:1px solid var(--line);padding-top:20px}
+  .about-values h3{font-size:1.15rem;margin-bottom:10px}
+  .about-values p{color:var(--muted);max-width:48ch}
   .tagline{display:inline-flex;align-items:center;gap:12px;margin-top:22px;font-family:var(--font-display);font-weight:600;color:var(--heading);letter-spacing:.08em;text-transform:uppercase;font-size:.85rem}
   @media (max-width:860px){.about-grid{grid-template-columns:1fr}}
 
@@ -168,6 +172,7 @@
   .icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .service h3{font-size:1.15rem;font-weight:600}
   .service p{color:var(--muted);font-size:.97rem}
+  @media (min-width:901px){.services{grid-template-columns:repeat(6,1fr)}.service{grid-column:span 2}.service:nth-last-child(-n+2){grid-column:span 3}}
   @media (max-width:900px){.services{grid-template-columns:repeat(2,1fr)}}
   @media (max-width:560px){.services{grid-template-columns:1fr}}
 
@@ -339,13 +344,22 @@
     <div class="wrap about-grid">
       <div class="section-head">
         <span class="eyebrow"><i class="px-mark"></i>About Nexvion Networks</span>
-        <h2>A smarter hosting approach for businesses that cannot afford downtime.</h2>
-        <span class="tagline"><i class="px-mark"></i>Built for speed. Ready for scale.</span>
+        <h2>Reliable infrastructure for the businesses of tomorrow.</h2>
+        <div class="about-values">
+          <article>
+            <h3>Our Mission</h3>
+            <p>To empower businesses with reliable, secure, and future-ready infrastructure — so our clients can focus on growth, not downtime.</p>
+          </article>
+          <article>
+            <h3>Our Vision</h3>
+            <p>As data continues to grow exponentially, Nexvion Networks is committed to staying ahead of the curve — investing in next-generation infrastructure, edge computing, and green data center technologies to meet the demands of tomorrow.</p>
+          </article>
+        </div>
       </div>
       <div class="about-copy">
-        <p><strong>Nexvion Networks Private Limited</strong> delivers secure hosting environments designed to support demanding business applications 24×7, improve website stability, and provide flexible infrastructure that grows with your changing technology requirements.</p>
-        <p>We help businesses create a dependable hosting environment with private cloud VPS solutions. Our approach focuses on stable performance, security, resource flexibility, and professional management.</p>
-        <p>Whether you are hosting business applications or mission-critical websites, we provide the infrastructure needed for smoother day-to-day operations.</p>
+        <p>Nexvion Networks is a trusted name in cloud computing and data center services, dedicated to powering the digital backbone of businesses across industries. In a world where uptime, security, and speed are no longer optional but essential, we deliver infrastructure solutions that organizations can depend on — from small enterprises taking their first steps into the cloud to large corporations managing complex, mission-critical workloads.</p>
+        <p>Our state-of-the-art data centers are built with redundancy, advanced security protocols, and energy-efficient technologies at their core, ensuring that our clients&#x27; data remains safe, accessible, and always online. Backed by a team of experienced engineers and support specialists available around the clock, Nexvion Networks offers more than just hosting — we provide peace of mind. Whether it&#x27;s scalable cloud hosting, secure colocation services, disaster recovery, or fully managed IT infrastructure, we tailor our solutions to meet the unique needs of every client we serve.</p>
+        <p>As technology continues to evolve at a rapid pace, we remain committed to innovation, investing in next-generation infrastructure and sustainable practices that prepare our clients — and our planet — for the future. At Nexvion Networks, we believe that behind every successful business is a foundation of reliable, secure, and forward-thinking infrastructure, and we are proud to be that foundation for the businesses we serve.</p>
       </div>
     </div>
   </section>
@@ -354,39 +368,34 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow"><i class="px-mark"></i>Services</span>
-        <h2>Everything your infrastructure needs, under one roof.</h2>
-        <p class="lead">Six services that cover hosting, hardware, management, email and recovery, so you deal with one team instead of five vendors.</p>
+        <h2>What We Do</h2>
+        <p class="lead">We provide end-to-end infrastructure solutions, including:</p>
       </div>
       <div class="services">
         <article class="service">
-          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg></div>
-          <h3>VPS Hosting</h3>
-          <p>Private cloud virtual servers with dedicated resources, full control of your environment and Tier 3 certified hosting.</p>
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.2 4.5 4.5 0 0 0 7 18z"/></svg></div>
+          <h3>Cloud Hosting &amp; Compute</h3>
+          <p>Scalable public, private, and hybrid cloud environments tailored to your workloads</p>
         </article>
         <article class="service">
-          <div class="icon"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg></div>
-          <h3>Physical Servers on Cloud</h3>
-          <p>Single-tenant physical servers hosted in our data centers for workloads that need the isolation and performance of real hardware.</p>
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><circle cx="7" cy="7" r="1" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <h3>Colocation Services</h3>
+          <p>Secure, high-density rack and cage space in Tier III/IV certified data centers</p>
         </article>
         <article class="service">
           <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div>
           <h3>Managed Services</h3>
-          <p>Monitoring, patching and day-to-day administration handled by our engineers, so your team can focus on the business.</p>
-        </article>
-        <article class="service">
-          <div class="icon"><svg viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.2 4.5 4.5 0 0 0 7 18z"/></svg></div>
-          <h3>Cloud Hosting</h3>
-          <p>Flexible cloud environments for business applications and websites whose demand changes month to month.</p>
-        </article>
-        <article class="service">
-          <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
-          <h3>Email Solutions</h3>
-          <p>Business email on your own domain, with the storage and reliability your people expect from a professional mailbox.</p>
+          <p>24/7 monitoring, network management, and technical support</p>
         </article>
         <article class="service">
           <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 8v4l3 2"/></svg></div>
-          <h3>Backup Solutions</h3>
-          <p>Scheduled backups with sensible retention, so a bad day for a server stays a small one for your business.</p>
+          <h3>Disaster Recovery &amp; Backup</h3>
+          <p>Business continuity solutions built for resilience</p>
+        </article>
+        <article class="service">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="16" y="16" width="6" height="6" rx="1"/><path d="M12 8v4M5 16v-4h14v4"/></svg></div>
+          <h3>Connectivity &amp; Networking</h3>
+          <p>Low-latency, high-bandwidth network access with redundant carriers</p>
         </article>
       </div>
     </div>
